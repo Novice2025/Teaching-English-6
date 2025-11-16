@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lego-Chain English | Vocabulário e Função</title>
+    <!-- Load Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons via CDN -->
+    <script type="module">
+        import { createIcons, Zap, CheckCircle, XCircle, ArrowRight, UserCheck, Blocks } from 'https://unpkg.com/lucide@latest/dist/esm/lucide.js';
+        window.lucide = { createIcons, Zap, CheckCircle, XCircle, ArrowRight, UserCheck, Blocks };
+    </script>
+    <style>
+        @import url('https://fonts.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb; /* bg-gray-50 */
+        }
+        .block-chain-container {
+            scroll-margin-top: 8rem; /* Para o scroll se ajustar ao cabeçalho fixo */
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <div id="app">
+        <!-- Conteúdo será renderizado aqui -->
+    </div>
+
+    <script>
+        // --- DATA: LESSON BLOCKS (O NOSSO "BLOCK CHAIN") ---
+        // Novo conjunto de lições baseado no reforço de adjetivos, advérbios e linguagem funcional.
+        const lessonBlocks = [
+          {
+            title: "Bloco 16: Adverbios de Tempo, Frequência e Comparação",
+            concepts: [
+              {
+                english: "She arrived just **after** breakfast. / I may never have the chance **again**.",
+                portuguese: "Ela chegou logo depois do café. / Eu talvez nunca mais tenha a chance novamente.",
+                culturalNote: "**After** (depois) e **before** (antes) funcionam como preposições ou advérbios. **Again** é o advérbio para 'novamente'.",
+              },
+              {
+                english: "I’ve had coffee **already**, thank you. / Have you had your lunch **yet**?",
+                portuguese: "Eu já tomei café, obrigado. / Você já almoçou?",
+                culturalNote: "**Already** (já) é usado em frases afirmativas (antes do esperado). **Yet** (já/ainda) é usado em perguntas e frases negativas.",
+              },
+              {
+                english: "I’m not **always** at home. / She **seldom** goes out. / We shall **soon** be home.",
+                portuguese: "Não estou sempre em casa. / Ela raramente sai. / Estaremos em casa em breve.",
+                culturalNote: "**Always**, **often**, e **seldom** são advérbios de frequência comuns. **Soon** significa 'em breve'.",
+              },
+              {
+                english: "Will he **still** be here when I get back? / He wrote from morning **till** night.",
+                portuguese: "Ele ainda estará aqui quando eu voltar? / Ele escreveu de manhã até a noite.",
+                culturalNote: "**Still** indica continuidade ('ainda'). **Till** é uma forma informal e comum de **Until** ('até').",
+              },
+            ],
+            quiz: {
+              question: "Qual palavra está correta na pergunta: 'Have you finished your homework ______?'",
+              options: [
+                { text: "already", correct: false, explanation: "'Already' é geralmente para frases afirmativas, ou quando você espera uma resposta positiva." },
+                { text: "still", correct: false, explanation: "'Still' implica que a ação está em andamento, não se encaixa na pergunta de conclusão." },
+                { text: "yet", correct: true }
+              ],
+              tip: "Para perguntar se algo já foi concluído, o termo padrão é **Yet**."
+            }
+          },
+          {
+            title: "Bloco 17: Quantificadores e Intensificadores",
+            concepts: [
+              {
+                english: "You can buy **almost** anything. / His wife was **also** called Mary.",
+                portuguese: "Você pode comprar quase tudo. / A esposa dele também se chamava Mary.",
+                culturalNote: "**Almost** (quase) é um advérbio de grau. **Also** (também) é usado para adicionar informação e geralmente vai no meio da frase.",
+              },
+              {
+                english: "There is **enough** food for everybody. / I have read **every** book on that shelf.",
+                portuguese: "Há comida suficiente para todos. / Eu li todos os livros naquela prateleira.",
+                culturalNote: "**Enough** (suficiente) e **every** (todos) são quantificadores importantes. **Each** é similar, mas foca nos itens individualmente.",
+              },
+              {
+                english: "I am so tired I can **hardly** walk. / I was **indeed** very glad to hear the news.",
+                portuguese: "Estou tão cansado que mal consigo andar. / Eu estava realmente muito contente em ouvir a notícia.",
+                culturalNote: "**Hardly** (dificilmente, mal) tem sentido negativo ('quase não'). **Indeed** (realmente) é um advérbio de ênfase, muitas vezes usado em contextos formais.",
+              },
+              {
+                english: "This is **far** better. / We must get **further** information. / **None** of these suggestions is helpful.",
+                portuguese: "Isto é muito melhor. / Devemos obter mais informações. / Nenhuma destas sugestões é útil.",
+                culturalNote: "**Far** pode ser usado para intensificar comparações ('muito melhor'). **Further** significa 'mais' (abstrato ou físico). **None** é o pronome para 'nenhum'.",
+              },
+            ],
+            quiz: {
+              question: "Qual advérbio tem um sentido **negativo**?",
+              options: [
+                { text: "fairly", correct: false, explanation: "Fairly é positivo ('razoavelmente bem')." },
+                { text: "hardly", correct: true },
+                { text: "only", correct: false, explanation: "Only restringe, mas não é inerentemente negativo como 'hardly'." }
+              ],
+              tip: "**Hardly** significa 'quase não' ou 'dificilmente'. Se você 'hardly knows' alguém, você mal a conhece."
+            }
+          },
+          {
+            title: "Bloco 18: Linguagem Funcional - Conversação e Respostas",
+            concepts: [
+              {
+                english: "**Accepting:** Ok, I will **accept** it.",
+                portuguese: "Ok, eu vou aceitar isso.",
+                culturalNote: "O verbo para 'aceitar' é **to accept**. A forma 'Accepting' é o substantivo (aceitação) ou o gerúndio.",
+              },
+              {
+                english: "**Apologizing:** Excuse me, ... / Sorry to interrupt. / I'm afraid so/not.",
+                portuguese: "Desculpe, ... / Desculpe interromper. / Receio que sim/não.",
+                culturalNote: "**'I'm afraid so/not'** é uma forma educada e ligeiramente formal de concordar ou discordar, geralmente com relutância.",
+              },
+              {
+                english: "**Surprise:** Good heavens! / I don’t believe it! / Well, well, well!",
+                portuguese: "Meu Deus! / Não acredito! / Ora, ora, ora!",
+                culturalNote: "Essas são expressões idiomáticas comuns para expressar surpresa, choque ou reflexão.",
+              },
+              {
+                english: "**Responding to news:** Good for you! / I’m sorry to hear that. / Oh, how lovely! / Wow!",
+                portuguese: "Que bom para você! / Sinto muito por ouvir isso. / Oh, que lindo! / Uau!",
+                culturalNote: "Respostas de empatia. Use **'I’m sorry to hear that'** para notícias ruins e **'Good for you!'** ou **'Sounds great!'** para notícias boas.",
+              },
+              {
+                english: "**'That's life':** That’s the way it goes. / These things happen. / You know how it is.",
+                portuguese: "É assim que funciona. / Essas coisas acontecem. / Você sabe como é.",
+                culturalNote: "Formas de expressar resignação ou aceitação de eventos inevitáveis.",
+              },
+            ],
+            quiz: {
+              question: "Qual expressão é a maneira mais formal e educada de dizer 'Sim, eu acho que é isso' (confirmando algo desagradável)?",
+              options: [
+                { text: "Good for you!", correct: false, explanation: "Essa frase é usada para parabenizar alguém." },
+                { text: "I’m afraid so.", correct: true },
+                { text: "I’m sorry to hear that.", correct: false, explanation: "Essa frase expressa simpatia por uma notícia ruim, mas não confirma a informação." }
+              ],
+              tip: "**'I'm afraid so'** (receio que sim) é a forma polida de confirmar algo que você sabe que o interlocutor não gostaria de ouvir."
+            }
+          },
+          {
+            title: "Bloco 19: Linguagem Funcional - Sala de Aula e Telefone",
+            concepts: [
+              {
+                english: "**Asking for help:** How do **you** say... / How do **you** spell it? / Where is the **stress**?",
+                portuguese: "Como você diz... / Como você soletra? / Onde está a sílaba tônica?",
+                culturalNote: "Incluir **'you'** (How do *you* say/spell it?) torna a frase mais fluida. **Stress** é o termo técnico para sílaba tônica.",
+              },
+              {
+                english: "What’s the difference **between** ... and ...? / What’s the past tense of ...?",
+                portuguese: "Qual a diferença entre ... e ...? / Qual é o passado de ...?",
+                culturalNote: "**Between** é usado quando se compara **duas** coisas. **Among** é usado para mais de duas.",
+              },
+              {
+                english: "Sorry I'm **late**. / I don’t understand. / I can’t understand the board.",
+                portuguese: "Desculpe, estou atrasado. / Eu não entendo. / Não consigo entender o quadro.",
+                culturalNote: "**Late** é o adjetivo para atrasado. Evite a tradução literal 'too late' (muito tarde, perdi a hora).",
+              },
+              {
+                english: "**Telephoning (Formal):** May I speak to... , please? / **(Informal):** Is... there?",
+                portuguese: "Posso falar com...? / O/A ... está aí?",
+                culturalNote: "Use **May I** para formalidade e **Is... there?** para informalidade ao perguntar por alguém ao telefone.",
+              },
+              {
+                english: "**Leaving a message:** Can you ask... to call me? / I'm sorry, I didn't **catch** that.",
+                portuguese: "Você pode pedir para... me ligar? / Desculpe, eu não entendi/peguei isso.",
+                culturalNote: "**'I didn't catch that'** é uma forma idiomática e educada de dizer que não entendeu o que foi dito.",
+              },
+            ],
+            quiz: {
+              question: "Qual frase é a mais adequada para pedir a um atendente de telemarketing para repetir uma informação?",
+              options: [
+                { text: "Sorry? Pardon?", correct: false, explanation: "Muito informais e bruscos para um contexto de atendimento." },
+                { text: "Could you repeat that, please?", correct: true },
+                { text: "I'm sorry, I didn't get it.", correct: false, explanation: "'Catch' é mais comum que 'get' neste contexto." }
+              ],
+              tip: "O modal **Could** sempre torna o pedido mais educado e formal. **'I didn't catch that'** também é excelente."
+            }
+          }
+        ];
+
+        // --- GLOBAL STATE ---
+        let currentBlockIndex = 0;
+        let quizStates = lessonBlocks.map(() => ({
+            answered: false,
+            correct: null,
+            selectedOption: null,
+        }));
+
+        // --- UTILITY FUNCTIONS ---
+
+        function getIconSVG(name, classes) {
+            const size = "w-6 h-6";
+            const color = classes;
+            // Uses Lucide icons (pre-loaded in <script type="module">)
+            const icons = {
+                Blocks: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${size} ${color}"><rect x="2" y="7" width="20" height="15" rx="2"/><path d="M17 2h3a2 2 0 0 1 2 2v3"/><path d="M7 2h3a2 2 0 0 0 2 2v3"/><path d="M10 2v3"/><path d="M7 2v3"/><path d="M17 2v3"/></svg>`,
+                Zap: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${size} ${color}"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+                CheckCircle: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${size} ${color}"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M9 11l3 3L22 4"/></svg>`,
+                XCircle: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${size} ${color}"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>`,
+                ArrowRight: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${size} ${color}"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`,
+                UserCheck: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${size} ${color}"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M19 8h6"/><path d="m22 3-6 6"/><circle cx="9" cy="7" r="4"/></svg>`,
+            };
+            return icons[name] || '';
+        }
+
+        function handleAnswer(blockIndex, optionIndex) {
+            const block = lessonBlocks[blockIndex];
+            const option = block.quiz.options[optionIndex];
+            
+            if (quizStates[blockIndex].answered) return;
+
+            const isCorrect = option.correct;
+            quizStates[blockIndex] = {
+                answered: true,
+                correct: isCorrect,
+                selectedOption: option,
+            };
+
+            renderApp(); // Re-render the app to update the block UI
+
+            if (isCorrect) {
+                // Wait 1.5s before moving to the next block
+                setTimeout(() => {
+                    handleBlockCompletion(blockIndex);
+                }, 1500);
+            }
+        }
+
+        function handleBlockCompletion(blockIndex) {
+            if (blockIndex === currentBlockIndex && quizStates[blockIndex].correct) {
+                currentBlockIndex++;
+                renderApp(); // Re-render the app to highlight the next block and scroll
+
+                // Scroll to the new active block
+                const activeBlockElement = document.getElementById(`block-${currentBlockIndex}`);
+                if (activeBlockElement) {
+                    activeBlockElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        }
+
+        // --- RENDER FUNCTIONS ---
+
+        function renderBlock(block, index) {
+            const isActive = index === currentBlockIndex;
+            const state = quizStates[index];
+            
+            const IconName = state.correct === true ? 'CheckCircle' : state.correct === false ? 'XCircle' : 'Zap';
+            const iconColor = state.correct === true ? "text-green-500" : state.correct === false ? "text-red-500" : "text-indigo-600";
+            const statusText = state.correct === true ? "Parabéns! Bloco Conectado." : state.correct === false ? "Opa! Reveja a nota cultural." : "Teste seu entendimento";
+
+            let conceptsHtml = block.concepts.map((concept, cIndex) => `
+                <div class="p-4 bg-indigo-50 rounded-lg">
+                    <p class="text-sm font-semibold text-indigo-700">🇧🇷 Português (O que queremos dizer):</p>
+                    <p class="text-xl italic text-gray-700 mb-2">"${concept.portuguese}"</p>
+                    <p class="text-sm font-semibold text-indigo-700">🇬🇧 English (A forma nativa):</p>
+                    <p class="text-2xl font-bold text-gray-900 mb-3">"${concept.english}"</p>
+                    <div class="mt-2 p-3 bg-indigo-100 rounded-md">
+                        <p class="text-sm font-medium text-indigo-900">💡 Foco da Lição / Lego (Gramática e Uso):</p>
+                        <p class="text-base text-indigo-900">${concept.culturalNote}</p>
+                    </div>
+                </div>
+            `).join('');
+
+
+            let optionsHtml = block.quiz.options.map((option, oIndex) => {
+                let buttonClass = "bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 focus:ring-indigo-500";
+                let disabled = '';
+
+                if (state.answered) {
+                    disabled = 'disabled';
+                    if (option.correct) {
+                        buttonClass = "bg-green-500 ring-4 ring-green-300 transform scale-105";
+                    } else if (option === state.selectedOption) {
+                        buttonClass = "bg-red-500 ring-4 ring-red-300 transform scale-105";
+                    } else {
+                        buttonClass = "bg-gray-400 cursor-not-allowed";
+                    }
+                }
+                
+                return `
+                    <button
+                        onclick="handleAnswer(${index}, ${oIndex})"
+                        ${disabled}
+                        class="p-4 text-white font-semibold rounded-xl transition duration-300 shadow-md transform hover:shadow-lg ${buttonClass} ${state.answered && !option.correct ? 'hover:shadow-none' : ''}"
+                    >
+                        ${option.text}
+                    </button>
+                `;
+            }).join('');
+
+            let quizFeedbackHtml = '';
+            if (state.answered) {
+                const feedbackClass = state.correct ? 'bg-green-100 border-2 border-green-500' : 'bg-red-100 border-2 border-red-500';
+                const feedbackTitleClass = state.correct ? 'text-green-800' : 'text-red-800';
+                const feedbackTitle = state.correct ? "Correto!" : "Incorreto!";
+                
+                let explanation = '';
+                if (!state.correct) {
+                    // Find the explanation for the selected incorrect option
+                    const selectedOptionData = block.quiz.options.find(opt => opt.text === state.selectedOption.text);
+                    const explanationText = selectedOptionData ? selectedOptionData.explanation : "Reveja a nota cultural acima.";
+                    
+                    explanation = `
+                        <p class="text-red-700 mt-2">
+                            **Revisão:** ${explanationText}
+                        </p>
+                    `;
+                }
+                
+                let nextButton = '';
+                if (state.correct) {
+                    nextButton = `
+                        <button
+                            onclick="handleBlockCompletion(${index})"
+                            class="mt-4 px-4 py-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 flex items-center transition duration-200"
+                        >
+                            Próximo Bloco ${getIconSVG('ArrowRight', 'w-5 h-5 ml-2')}
+                        </button>
+                    `;
+                }
+
+                quizFeedbackHtml = `
+                    <div class="mt-6 p-4 rounded-xl transition-opacity duration-500 ${feedbackClass}">
+                        <p class="font-bold text-lg ${feedbackTitleClass}">
+                            ${feedbackTitle}
+                        </p>
+                        ${explanation}
+                        <p class="text-gray-700 mt-2">
+                            **Dica do Professor:** ${block.quiz.tip}
+                        </p>
+                        ${nextButton}
+                    </div>
+                `;
+            }
+
+            const blockClass = isActive 
+                ? 'bg-white border-4 border-indigo-300 transform scale-100' 
+                : 'bg-gray-100 opacity-60 pointer-events-none';
+
+            return `
+                <div id="block-${index}" class="block-chain-container p-6 md:p-8 rounded-xl shadow-2xl transition-all duration-500 ${blockClass}">
+                    <h3 class="text-3xl font-extrabold text-gray-900 mb-6 flex items-center">
+                        ${getIconSVG('Blocks', 'w-8 h-8 text-indigo-500 mr-3')} ${block.title}
+                    </h3>
+
+                    <!-- CONCEITOS -->
+                    <div class="space-y-6 mb-8 border-l-4 border-indigo-400 pl-4">
+                        ${conceptsHtml}
+                    </div>
+
+                    <!-- EXERCÍCIO -->
+                    <div class="mt-8 pt-6 border-t border-indigo-200">
+                        <h4 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                            ${getIconSVG(IconName, `w-6 h-6 mr-2 ${iconColor}`)} ${statusText}
+                        </h4>
+                        
+                        <p class="text-lg font-medium text-gray-700 mb-6">${block.quiz.question}</p>
+
+                        <div class="grid md:grid-cols-3 gap-4">
+                            ${optionsHtml}
+                        </div>
+
+                        ${quizFeedbackHtml}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderApp() {
+            const container = document.getElementById('app');
+            const isComplete = currentBlockIndex >= lessonBlocks.length;
+            const progressPercent = (currentBlockIndex / lessonBlocks.length) * 100;
+
+            // HEADER
+            const header = `
+                <header class="bg-white shadow-lg sticky top-0 z-10">
+                    <div class="max-w-4xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                        <h1 class="text-3xl font-extrabold text-indigo-700 flex items-center">
+                            ${getIconSVG('Blocks', 'w-8 h-8 mr-2 text-indigo-500')}
+                            Lego-Chain English
+                        </h1>
+                        <div class="flex items-center space-x-2">
+                            ${getIconSVG('UserCheck', 'w-5 h-5 text-gray-500')}
+                            <span class="text-sm font-medium text-gray-600">By Daby @2025</span>
+                        </div>
+                    </div>
+                </header>
+            `;
+            
+            // MAIN CONTENT START
+            let mainContent = `
+                <main class="max-w-4xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+                    
+                    <!-- BOAS-VINDAS -->
+                    <div class="bg-indigo-600 p-6 sm:p-8 rounded-2xl shadow-xl text-white mb-10">
+                        <h2 class="text-3xl font-bold mb-3">Bem-vindo(a) à sua jornada de inglês!</h2>
+                        <p class="text-lg opacity-90">
+                            O objetivo deste curso é consertar o **"Bra-glish"** e reforçar o vocabulário fundamental. Estes blocos focam em **Advérbios, Quantificadores e Linguagem Conversacional Essencial**.
+                        </p>
+                        <div class="mt-4">
+                            <p class="text-base font-semibold">Progresso Atual:</p>
+                            <div class="w-full bg-indigo-500 rounded-full h-2.5 mt-1">
+                                <div 
+                                    class="bg-lime-300 h-2.5 rounded-full transition-all duration-700" 
+                                    style="width: ${progressPercent}%"
+                                    role="progressbar"
+                                    aria-valuenow="${progressPercent}"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                ></div>
+                            </div>
+                            <p class="text-sm mt-1">${currentBlockIndex} de ${lessonBlocks.length} Blocos Conectados</p>
+                        </div>
+                    </div>
+
+                    <!-- BLOCKS CONTAINER -->
+                    <div class="space-y-8">
+            `;
+
+            // BLOCKS RENDERING
+            mainContent += lessonBlocks.map((block, index) => {
+                const blockHtml = renderBlock(block, index);
+                
+                let connectionLine = '';
+                if (index > 0) {
+                    const lineColor = index <= currentBlockIndex ? 'bg-lime-500' : 'bg-gray-300';
+                    connectionLine = `
+                        <div class="absolute -top-4 left-1/2 -ml-0.5 w-1 h-8 ${lineColor} transition-colors duration-500"></div>
+                    `;
+                }
+
+                let completionIndicator = '';
+                 if (index < lessonBlocks.length - 1) {
+                    const indicatorClass = index < currentBlockIndex ? 'scale-100 opacity-100' : 'scale-0 opacity-0';
+                    completionIndicator = `
+                        <div class="flex justify-center -mb-4 mt-4 transition-transform duration-500 ${indicatorClass}">
+                            ${getIconSVG('CheckCircle', 'w-6 h-6 text-lime-500 bg-white rounded-full z-[1]')}
+                        </div>
+                    `;
+                }
+
+
+                return `
+                    <div key="${index}" id="block-container-${index}" class="relative">
+                        ${connectionLine}
+                        ${blockHtml}
+                        ${completionIndicator}
+                    </div>
+                `;
+            }).join('');
+
+            mainContent += '</div>'; // close space-y-8 container
+
+            // CONCLUSÃO
+            if (isComplete) {
+                mainContent += `
+                    <div class="mt-12 p-8 bg-lime-500 rounded-2xl shadow-xl text-white text-center">
+                        ${getIconSVG('CheckCircle', 'w-12 h-12 mx-auto mb-4')}
+                        <h3 class="text-3xl font-bold mb-2">Jornada Concluída!</h3>
+                        <p class="text-xl">
+                            Parabéns! Você conectou todos os Blocos de Conhecimento. Seu Block Chain de inglês está **sólido** e livre de 'Bra-glish'!
+                        </p>
+                        <p class="mt-4 text-base">
+                            A repetição é a chave. Revise os blocos e continue construindo.
+                        </p>
+                    </div>
+                `;
+            }
+
+            // FOOTER
+            mainContent += `
+                <footer class="mt-16 text-center text-sm text-gray-500 border-t pt-8">
+                    <p>&copy; By Daby @2025. Lego-Chain Method. Aprender é construir.</p>
+                </footer>
+            `;
+
+            mainContent += '</main>'; // close main
+
+            container.innerHTML = header + mainContent;
+        }
+
+        // Initialize the app on window load
+        window.onload = function() {
+            renderApp();
+        };
+
+        // Expose handleAnswer and handleBlockCompletion globally for button click handlers
+        window.handleAnswer = handleAnswer;
+        window.handleBlockCompletion = handleBlockCompletion;
+        
+    </script>
+</body>
+</html>
